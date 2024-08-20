@@ -1,0 +1,448 @@
+---
+title: "Analyzing Player Ball Possession in Football Passing Networks Using Markov Chains and Steady-State Distribution"
+author: "Andrew Shin"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+```
+
+## Abstract:
+
+  In the dynamic game of football, players pass the ball to each other in order to maximize the chance of creating and capitalizing on scoring opportunities. In this project, I develop a probabilistic model using Markov chains to analyze and estimate the future player's ball possession in a passing network. By analyzing the steady-state distribution of the transition probability matrix, the model provides insights into how ball possession is distributed among individual players. In addition, I illustrate that the analysis of steady-state probability reveals how the likelihood of player ball possession in over the next 10 and 20 minutes differs from the probability distribution obtained through Monte-Carlo simulation. 
+
+## Introduction
+
+  During a football match, both teams make an effort to move the ball around the pitch to find spaces where they can increase the probability of creating goal-scoring opportunities. Maintaining possession for a significant amount of time relies heavily on the passes exchanged between teammates. In the fast-paced environment of football, each player contributes differently to the team's overall pass distribution. This leads to a question of how the ball is likely to be shared or possessed among players over time. When a team initiates a passing sequence, each pass from one player to another represents a transition from one state to another, which can be modeled using Markov chains. 
+  
+  By applying the transition probability matrix and Markov Chains theory, I can gain insights into the system’s dynamics, such as estimating the probability of a specific player receiving the ball after multiple passes, calculating the expected number of passes needed to reach a particular player, and predicting long-term behavior through the simulation of stochastic processes. Additionally, the steady-state distribution can estimate how ball possession is likely to be distributed among players over time. This approach can also highlight a central player in ball possession, indicating that the majority of passes are likely to be directed toward this player.
+
+## Methods {#meth}
+
+### Data Collection
+
+The data for this analysis was retrieved from StatsBomb Open Data, which provides up-to-date match data from numerous football leagues around the world. Each match data set typically includes 75 columns and around 4,000 rows on average, capturing event data in detail such as player movements and passes, almost on a per-second basis. For this study, I chose the one of Spain's matches in EURO 2024 and focused on passes exchanged between players in this match. I chose Spain’s Round of 16 match because their passing accuracy (90.2%, 748/792) and ball possession (75%) were the highest among all the matches they played in this tournament.
+
+```{r, include=FALSE}
+lineup <- read_csv("/Users/andrewshin/Downloads/markov_possession/lineup_dataframe.csv", 
+                   show_col_types = FALSE)
+event <- read_csv("/Users/andrewshin/Downloads/markov_possession/event_dataframe.csv",
+                  show_col_types = FALSE)
+```
+
+### Data Preprocessing
+
+#### Data Cleaning:
+
+The raw data was cleaned to ensure simplicity and accuracy. I filtered out the columns that were not used for this analysis, retaining only the following columns: match time, player names, types of actions, and substitution information.
+
+```{r, include=FALSE}
+# filter out unnecessary columns
+selected_columns = c('period', 'minute', 'second',
+           'type_name', 'team_name', 'player_name', 'position_name',
+           'pass_recipient_name', 'sub_type_name', 'outcome_name', 
+           'foul_committed_card_name', 'substitution_replacement_name')
+event <- event[, selected_columns]
+```
+
+### Assumption
+
+For simplicity, this analysis focuses exclusively on the first half of the game, a period during which substitutions rarely occur. Given that Spain completed a total of 228 accurate passes in the first 23rd minutes, accounting for 30.5 percent of their final total accurate passes, this sample is sufficient to calculate the initial distribution.
+
+To maintain the memoryless property of Markov chains, I assume that the decision to pass to a specific player is based solely on the current ball holder, without consideration of previous passes. The transition probability matrix calculated based on the passes up to the 23rd minute is assumed to remain constant for the rest of the first half, even though they are likely to vary throughout the entire match. This assumption allows me to compare the steady-state distribution to the one obtained through Monte-Carlo simulation.
+
+The analysis tracks only the direct passing events between players, such as when player $i$ passes to player $j$. Passes resulting from set plays, such as corner kicks, goal kicks, and throw-ins, are excluded. These types of passes are often influenced by tactical decisions that designate specific players for these roles, which could introduce bias into the data. Excluding them ensures that the analysis more accurately reflects the team’s typical in-play passing network. 
+
+### Construction Transition Probability Matrix (TPM)
+
+I counted the number of successful passes from each player to every other player on the team up to 23th minute of the match. The TPM was constructed by normalizing the pass counts. Specifically, the probability of a pass from player i to player j was calculated as:
+
+The transition probability $P(X_{t+1} = j \mid X_t = i)$ is given by:
+
+$$P_{ij} = P(X_{t+1} = j \mid X_t = i) = \frac{\#p}{\#P}$$ where:
+
+-   $\#p$ is the number of passes player $i$ made to player $j$,
+
+-   $\#P$ is the total number of passes player i made in the first 30 minutes of the match,
+
+-   $t$ represents a finite time when one pass is delivered from the ball holder to the recipient,
+
+-   $i$ and $j$ represent the ball holder and the pass recipient, respectively, and thus correspond to the eleven players on the team. $i, j \in S$, where $S = \{player_1, \dots, player_{11}\}$
+
+-   $\sum_{j} P_{ij} = 1$.
+
+```{r, include=FALSE}
+# computes the number of passes a pair of players made and returns a data frame
+pass_data <- function(df, minute, period, team) {
+  # filters out unnecessary rows for the analysis
+  mask_at <- df$type_name == 'Pass' & 
+           df$team_name == team & 
+           !df$sub_type_name %in% c('Throw-in', 'Corner', 'Goal Kick') &
+           df$minute <= minute & 
+           df$period == period &
+           is.na(df$outcome_name)
+  pass_df <- df[mask_at, c("player_name", "pass_recipient_name")]
+  
+  # checks whether substitutions occurred and replace with players who were subbed in
+  sub_at <- df$type_name == "Substitution" & 
+    df$team_name == team & 
+    df$minute <= minute &
+    df$period == period
+  sub_players <- df[sub_at, "player_name"] %>% pull
+  
+  # filters out rows corresponding to players subbed out
+  if (length(sub_players) >= 1) {
+    pass_df <- pass_df %>% filter(!player_name %in% sub_players & 
+                                    !pass_recipient_name %in% sub_players)
+  }
+  
+  return(pass_df) 
+}
+```
+
+```{r, include=FALSE}
+# The players’ names in the match data frames are their official names, 
+# which are often long and unfamiliar to football fans. 
+# Hence, I replaced these with the nicknames by which they are commonly known.
+
+# P: transition probability matrix
+# lineup: list of players in each team in the match
+make_nicknames <- function(P, lineup) {
+  nicknames <- c()
+  for (i in 1:length(rownames(P))) {
+    # find an index of player's nickname in data frame
+    index <- which(rownames(P)[i] == lineup$player_name)
+    nicknames <- c(nicknames, lineup$player_nickname[index])
+  }
+  
+  # make sure the number of columns is greater than 1
+  if (dim(P)[2] > 1) {
+    colnames(P) = nicknames
+  }
+  
+  rownames(P) = nicknames
+  return(P)
+}
+```
+
+```{r, include=FALSE}
+# This function calculates a transition probability matrix based on the given arguments 
+# and returns a TPM
+
+transition_matrix <- function(df, minute, period, team, lineup) {
+  pass <- pass_data(df, minute, period, team)
+  # number of total passes a single player made within a given time
+  total_pass <- pass %>% group_by(player_name) %>% count
+  # number of total passes a pair of players made within a given time
+  pass_pair <- pass %>% group_by(player_name, pass_recipient_name) %>% count
+  
+  # construct an 11x11 matrix
+  P <- matrix(0, nrow=length(total_pass$player_name), 
+              ncol = length(total_pass$player_name), 
+            dimnames = list(total_pass$player_name, total_pass$player_name))
+  
+  # insert probabilities in each entry
+  for (i in 1:nrow(pass_pair)) {
+    holder <- pass_pair$player_name[i]
+    receiver <- pass_pair$pass_recipient_name[i]
+    P[holder, receiver] <- pass_pair$n[i] / (total_pass$n[total_pass$player_name == holder])
+  }
+  # replace names with nicknames
+  P = make_nicknames(P, lineup)
+  return(P)
+}
+```
+
+### Analysis of Steady-State Distribution (SD)
+
+1.  Markov Chain Modeling: Each TPM was treated as the transition matrix of a Markov chain. The steady-state distribution vector, representing the long-term probabilities of the ball being with each player, was computed based on the first 23rd minute of the game.
+
+2.  Limiting Probabilities:
+
+- For my project, I will rely on the theorem 4.1 in Introduction to Probability Models by Sheldon M. Ross, saying:
+
+$$
+\text{For an irreducible ergodic Markov chain } lim_{n\rightarrow \infty} P_{ij}^n \text{ exists and is
+independent of } i.
+$$
+$$
+ \text{ Furthermore, letting } \pi_j = lim_{n\rightarrow \infty} P_{ij}^n,\ j \ge 0
+$$
+$$
+\text{then } \pi_j \text{ is the unique nonegative solution of } \pi_j = \sum_{i=0}^\infty \pi P_{ij},\ j \ge 0,\ \sum_{j=0}^\infty \pi_j = 1
+$$
+
+- I can guarantee that a real square matrix with positive entries has a unique eigenvalue of largest magnitude and that eigenvalue is real by Perron–Frobenius theorem. Thus, consider probability distribution $X$ over $S$ such that $P(X = i) = \pi_1$, which implies the probability that a player $i$ receives the ball is $\pi_1$ in a long-run.
+
+3. Monte-Carlo Simulation: I will compare the steady-state distribution to the probability distribution obtained through Monte Carlo simulation. The initial probabilities for this simulation will also be based on the total number of passes up to the 23rd minute of the match.
+
+```{r, include=FALSE}
+# computes eigenvalues and eigenvectors and
+# returns a steady-state distribution
+steady_dist <- function(tpm) {
+  eigen_result <- eigen(t(tpm))
+  dist <- Re((eigen_result$vectors[,1] / sum(eigen_result$vectors[,1])))
+  result <- data_frame(Player = rownames(tpm), p = round(dist, 5))
+  return(result)
+} 
+```
+
+```{r, include=FALSE}
+# calculate the actual pass probabilities for a team within a specific time period
+actual_pass_prob <- function(df, minute, period, team, lineup) {
+  pass <- pass_data(df, minute, period, team)
+  # Group the passes by the recipient's name and count the number of passes each player received
+  total_pass <- pass %>% group_by(pass_recipient_name) %>% count
+  
+  # The probability is calculated as the number of passes received by each player 
+  # divided by the total number of passes
+  result <- data_frame(Player = total_pass$pass_recipient_name, 
+                       actual_p = (total_pass$n / sum(total_pass$n)))
+  
+  # creates the matrix P with the actual pass probabilities
+  P <- matrix(0, nrow=length(result$Player), 
+              ncol = 1, 
+            dimnames = list(result$Player, 1))
+  for (i in 1:nrow(P)) {
+    P[i, 1] <- result$actual_p[i]
+  }
+  result_new <- make_nicknames(P, lineup) # changes names to their nicknames
+  df <- data_frame(Player = rownames(result_new), p = round(result$actual_p, 5))
+  return(df)
+} 
+```
+
+## Result
+
+### Transition Probability Matrix
+
+I constructed the transition probability matrix by counting all passes exchanged between each player and the other 10 players, then dividing by the total number of passes that player made up to the 23rd minute. The transition probability matrix that I will use for this analysis is:
+
+![Transition Probability Matrix](/Users/andrewshin/Downloads/markov_possession/table1.png)
+
+### N-step Transition Probabilities
+
+Let $q_i$ be the probability that the chain is in state $i$ at time 0, which indicates that the ball is with a player $i$ at time $0$. I can construct $q_i$ by dividing the number of pass receptions made by a player $i$ during the first 23 minutes by the total number of passes made by the team.
+
+```{r, include=FALSE}
+team = "Spain"
+minute = 23
+period = 1
+
+# initial distribution q
+q <- actual_pass_prob(event, minute, period, team, lineup)
+# transition probability matrix P
+P <- transition_matrix(event, minute, period, team, lineup)
+```
+
+We can then determine the probability that the system is in state $i$ at time $n$ using the following reasoning:
+
+$$
+\text{Probability of the ball being in a player } j \text{ at time } n
+$$ 
+$$
+\sum_{i=1}^{11} (\text{probability that a ball is originally at player } i)
+$$ 
+$$
+\times (\text{probability of passing from player } i \text{ to player } j \text{ in n transitions})
+$$ 
+$$
+= \sum_{i=1}^{11} q_iP_{ij}^n
+$$
+
+![Initial Distribution $q$](/Users/andrewshin/Downloads/markov_possession/table2.png)
+
+To illustrate the use of this notation, for example, we answer the following question: Suppose the initial probability distribution is given as above. Three passes from now, what fraction of all players will be passing to Fabián Ruiz? The desired probability is
+```{r, include=FALSE}
+P_3 = P^3
+(t(q$p) %*% P_3[,3])
+```
+
+$$
+q^T \cdot P_{Fabián\ Ruiz}^3 = 0.00481
+$$
+Hence, three passes from now, 0.48% of all players will be passing to Fabián Ruiz. Using this notion, we can calculate the probability of players' pass reception after multiple sequences of passes in a game. 
+
+### Steady-State Distribution
+
+To determine the long-run probabilities, I can compute the steady-state distribution by finding the eigenvector corresponding to the eigenvalue of 1.
+
+![Steady-State Distribution](/Users/andrewshin/Downloads/markov_possession/table3.png)
+```{r, include=FALSE}
+steady_states <- steady_dist(P)
+steady_states[order(-steady_states$p),]
+```
+![Plot of Steady-State Distribution](/Users/andrewshin/Downloads/markov_possession/steady_state_plot.png)
+The steady-state distribution represents the long-term behavior of the passing network, where each value corresponds to the probability that the ball is with a particular player after many passes.
+
+Laporte has the highest stationary probability, indicating that in the long run, he is the most likely player to have possession of the ball. As a center-back, this might suggest that he is frequently involved in ball circulation, likely playing a key role in building play from the back. Rodri, as a central defensive midfielder, also has a high probability. His role often involves controlling the tempo of the game and distributing passes, which is consistent with a high stationary probability.
+
+The distribution indicates a strong involvement of defenders and midfielders in maintaining possession. Players like Laporte, Rodri, and Cucurella are key figures in the passing network, likely reflecting their roles in controlling the game and redistributing the ball.
+
+```{r, include=FALSE}
+# plot steady-state distribution
+steady_state_plot <- ggplot(steady_states, aes(x = reorder(Player, -p), y = p, group = 1)) + 
+  geom_line() + 
+  geom_point() + 
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1,  color = "black")) +
+  labs(title = "Steady State Pass Distribution at 23 mins",
+       x = "Player",
+       y = "P")
+
+# ggsave(filename="steady_state_plot.png", 
+#     plot = steady_state_plot, 
+#     height = 5, width = 7, units="in")
+```
+
+The empirical distribution shows how the ball is distributed among players up to the 35th and 45th minutes. In Figure 5, I observed that the empirical distribution closely matches the steady-state distribution. It’s surprising how well the empirical distribution aligns with the steady-state distribution. 
+
+```{r, include=FALSE}
+ac_dis_3 <- actual_pass_prob(event, 35, period, team, lineup)
+ac_dis_4 <- actual_pass_prob(event, 45, period, team, lineup)
+
+# creates a data frame including steady state and empirical probabilities
+dist <- data_frame(Player = steady_states$Player,
+                   stationary_at_25 = steady_states$p,
+                   actual_at_35 = ac_dis_3$p,
+                   actual_at_45 = ac_dis_4$p)
+
+# transform this data frame to long format for easier plotting
+dis_long <- pivot_longer(dist, cols = c(stationary_at_25, actual_at_35, actual_at_45), 
+                           names_to = "Type", values_to = "P")
+
+# generate a plot to compare steady-state probability with empirical probability
+comp_plot <- ggplot(dis_long, aes(x = reorder(Player, -P), y = P, group = Type, color = Type)) + 
+  geom_line(aes(linetype = Type), linewidth = 1) +
+  geom_point() +
+  labs(title = paste0("Stationary Distribution at 23 mins vs Empirical Distribution"), 
+         x = "Player Name", y = "P") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, color = "black")) + 
+  scale_color_manual(values = c("stationary_at_25" = "red", "actual_at_35" = "skyblue", 
+                                  "actual_at_45" = "black")) +
+  scale_linetype_manual(values = c("stationary_at_25" = "solid", "actual_at_35" = "solid", 
+                                  "actual_at_45" = "solid"))
+
+# ggsave(filename="comparison_plot.png", 
+#       plot = comp_plot, 
+#       height = 5, width = 7, units="in")
+```
+
+![Plot of Steady-State Distribution](/Users/andrewshin/Downloads/markov_possession/comparison_plot.png)
+
+$$
+rmse_1 = \sqrt{mean((empirical_{35th\ min} - steady_{23rd\ min})^2)},\ rmse_2 = \sqrt{mean((empirical_{45th\ min} - steady_{23rd\ min})^2)}
+$$
+$$
+mean(rmse_1, rmse_2) = 0.0107
+$$
+
+```{r, include=FALSE}
+# computes a mean squared error between steady-state probabilities 
+rmse3 <- sqrt(mean((ac_dis_3$p - steady_states$p)^2))
+rmse4 <- sqrt(mean((ac_dis_4$p - steady_states$p)^2))
+x2 <- c(rmse3, rmse4)
+mse_mean2 <- round(mean(x2), 7)
+```
+
+The root mean square error (RMSE) is notably small, indicating that the steady-state distribution provides a strong estimate of ball distribution among players in the long run. Therefore, I can confidently conclude that the steady-state distribution is a reliable predictor of how the ball is likely to be distributed among players over extended periods.
+
+### Comparison with Monte Carlo Simulation
+
+In this section, I will compare the error between the steady-state distribution and the empirical data to the error between the simulation distribution and the empirical data. The distribution I will use for the simulation is the initial distribution $q$, with sample sizes corresponding to the number of passes made between the 23rd and 35th minutes, and between the 23rd and 45th minutes. 
+
+By the 35th minute, Spain completed 303 accurate passes, indicating an additional 75 passes since the 23rd minute. Similarly, with a total of 354 passes completed by the 45th minute, reflecting 126 additional passes since the 23rd minute, Then I perform simulations.
+
+```{r, include=FALSE}
+# a vector of different iterations
+# a vector of players
+# n: number of passes made after 30th minute
+simulations <- function(itrs, players, n) {
+  values <- numeric(length(players))
+  # Create a data frame to store results, starting with player names
+  result <- data_frame(Player = players)
+  
+  for (itr in itrs) {
+    for (i in 1:itr) {
+      # Perform a simulation where 'n' passes are sampled with replacement from players,
+      # based on their probabilities stored in 'q$p'
+      sim <- sample(q$Player, size = n, replace = TRUE, prob = q$p)
+      
+      # normalize it by the total number of passes 'n'
+      x <- table(sim) / n
+      
+      # Update the values for each player based on the current simulation
+      # Ensure that the case where a particular player does not appear in
+      # the sequence of random samples is properly handled
+      for (j in seq_along(players)) {
+        if (!is.na(x[players[j]])) {
+          values[j] <- values[j] + x[players[j]]
+        }
+      }
+    }
+    # Average the values over the number of iterations 'itr'
+    values <- values / itr
+    # Add the averaged values as a new column to this data frame
+    result <- cbind(result, values)
+  }
+  colnames(result) <- c("Player", "10", "10^2", "10^3", "10^4")
+  # Transform the result to long format for easier analysis
+  df_long <- result %>%
+    pivot_longer(cols = -Player, names_to = "Iteration", values_to = "Value")
+  # Transform this back into a wide format
+  df_wide <- df_long %>%
+    pivot_wider(names_from = Player, values_from = Value)
+  return(df_wide)
+}
+```
+
+```{r, include=FALSE}
+itrs <- c(10, 10^2, 10^3, 10^4)
+players <- c("Álvaro Morata", "Aymeric Laporte", "Daniel Carvajal", 
+             "Fabián Ruiz", "Lamine Yamal", "Marc Cucurella", 
+             "Nico Williams", "Pedri", "Robin Le Normand", "Rodri", 
+             "Unai Simón")
+
+result_sim1 <- simulations(itrs, players, 75) # additional 75 passes
+vec1 <- as.vector(as.matrix(result_sim1[, -1])[4,]) # takes only probability obtained through 10^4 iterations 
+result_sim2 <- simulations(itrs, players, 126) # additional 126 passes
+vec2 <- as.vector(as.matrix(result_sim2[, -1])[4,]) # takes only probability obtained through 10^4 iterations
+
+actual_dist_35 <- ac_dis_3[order(ac_dis_3$Player),]$p
+rmse5 <- sqrt(mean((actual_dist_35- vec1)^2)) # calculate RMSE between empirical and sim data
+actual_dist_45 <- ac_dis_4[order(ac_dis_4$Player),]$p
+rmse6 <- sqrt(mean((actual_dist_45- vec2)^2)) # calculate RMSE between empirical and sim data
+
+# creates a data frame to store info I obtained above
+df_mse <- data_frame(MSE = c("steady_state vs empirical_35", "steady_state vs empirical_45", 
+                             "sim vs empirical_35", "sim vs empirical_45"), 
+                     value = c(rmse3,rmse4,rmse5,rmse6))
+```
+
+### Result of Monte Carlo Simulation
+
+![Comparison between the steady-state distribution and the distribution from the simulation](/Users/andrewshin/Downloads/markov_possession/table4.png)
+
+```{r, include=FALSE}
+result_sim1
+result_sim2
+```
+![Result of Monte Carlo Simulation (35th min)](/Users/andrewshin/Downloads/markov_possession/table5.png)
+
+![Result of Monte Carlo Simulation (45th min)](/Users/andrewshin/Downloads/markov_possession/table6.png)
+
+Based on the RMSE, the steady-state distribution closely matches the empirical distribution at both 35th and 45th minute. However, both simulation distributions slightly aligns more with the empirical distributions.
+
+## Discussion
+
+The steady-state distribution of the transition probability matrix not only illustrates how the passing network is currently distributed among the players, but it also provides an approximation of the pass distribution in the next several sequences. To validate this prediction, I calculated the empirical distribution at each time period and the root mean squared error (RMSE) between these two distributions. Interestingly, the error is sufficiently small, supporting the validity of the estimation. Furthermore, a comparison between the accuracy of the stationary distribution and the accuracy of a Monte Carlo simulation based on the initial distribution $q$ reveals an intriguing result.
+
+Due to time constraints, I focused only on the first half of the game, where substitutions rarely occur, and used the first 23 minutes to calculate the initial distribution and transition probability matrix. If additional time were available for this project, I would split the game into more time segments, continuously update the transition matrix, and recalculate the steady-state distribution for the next 10-minute interval. I would then compare these predictions with the empirical ball possession and the Monte Carlo simulation results across the entire match.
+
+In addition to n-step transition probabilities and identifying key players in steady-state distribution, transition matrix and steady-state vector contains numerous valuable probabilistic information, such as the likelihood of the ball reaching a specific player after several passing sequences and the average number of individual pass receptions. Exploring these probabilities further could yield deeper insights into the dynamics of the passing network and its evolution throughout the match.
