@@ -215,7 +215,7 @@ actual_pass_prob <- function(df, minute, period, team, lineup) {
   result_new <- make_nicknames(P, lineup) # changes names to their nicknames
   df <- data_frame(Player = rownames(result_new), p = round(result$actual_p, 5))
   return(df)
-} 
+}
 ```
 
 ## Result
