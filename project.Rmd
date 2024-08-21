@@ -391,7 +391,7 @@ simulations <- function(itrs, players, n) {
       }
     }
     # Average the values over the number of iterations 'itr'
-    values <- round(values / itr, digits=5)
+    values <- round(values / itr, digits=4)
     # Add the averaged values as a new column to this data frame
     result <- cbind(result, values)
   }
@@ -437,8 +437,11 @@ kable(df_mse, caption = "RMSE Comparison b/t steady-state and simulation")
 
 ```{r}
 kable(result_sim1, caption = "Result of Monte Carlo Simulation (35th min)")
+```
+```{r}
 kable(result_sim2, caption = "Result of Monte Carlo Simulation (45th min)")
 ```
+
 
 Based on the RMSE, the steady-state distribution closely matches the empirical distribution at both 35th and 45th minute. However, both simulation distributions slightly aligns more with the empirical distributions.
 
