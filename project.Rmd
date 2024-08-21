@@ -11,6 +11,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
+library(knitr)
 ```
 
 ## Abstract:
@@ -151,7 +152,8 @@ transition_matrix <- function(df, minute, period, team, lineup) {
   for (i in 1:nrow(pass_pair)) {
     holder <- pass_pair$player_name[i]
     receiver <- pass_pair$pass_recipient_name[i]
-    P[holder, receiver] <- pass_pair$n[i] / (total_pass$n[total_pass$player_name == holder])
+    val <- round(pass_pair$n[i] / (total_pass$n[total_pass$player_name == holder]), digits = 4)
+    P[holder, receiver] <- val
   }
   # replace names with nicknames
   P = make_nicknames(P, lineup)
@@ -159,7 +161,7 @@ transition_matrix <- function(df, minute, period, team, lineup) {
 }
 ```
 
-### Analysis of Steady-State Distribution (SD)
+### Analysis of Steady-State Distribution
 
 1.  Markov Chain Modeling: Each TPM was treated as the transition matrix of a Markov chain. The steady-state distribution vector, representing the long-term probabilities of the ball being with each player, was computed based on the first 23rd minute of the game.
 
@@ -224,8 +226,6 @@ actual_pass_prob <- function(df, minute, period, team, lineup) {
 
 I constructed the transition probability matrix by counting all passes exchanged between each player and the other 10 players, then dividing by the total number of passes that player made up to the 23rd minute. The transition probability matrix that I will use for this analysis is:
 
-![Transition Probability Matrix](/Users/andrewshin/Downloads/markov_possession/table1.png)
-
 ### N-step Transition Probabilities
 
 Let $q_i$ be the probability that the chain is in state $i$ at time 0, which indicates that the ball is with a player $i$ at time $0$. I can construct $q_i$ by dividing the number of pass receptions made by a player $i$ during the first 23 minutes by the total number of passes made by the team.
@@ -239,6 +239,9 @@ period = 1
 q <- actual_pass_prob(event, minute, period, team, lineup)
 # transition probability matrix P
 P <- transition_matrix(event, minute, period, team, lineup)
+```
+```{r}
+kable(P)
 ```
 
 We can then determine the probability that the system is in state $i$ at time $n$ using the following reasoning:
@@ -255,9 +258,9 @@ $$
 $$
 = \sum_{i=1}^{11} q_iP_{ij}^n
 $$
-
-![Initial Distribution $q$](/Users/andrewshin/Downloads/markov_possession/table2.png)
-
+```{r}
+kable(q, caption = "Initial Distribution")
+```
 To illustrate the use of this notation, for example, we answer the following question: Suppose the initial probability distribution is given as above. Three passes from now, what fraction of all players will be passing to Fabián Ruiz? The desired probability is
 ```{r, include=FALSE}
 P_3 = P^3
@@ -272,13 +275,14 @@ Hence, three passes from now, 0.48% of all players will be passing to Fabián Ru
 ### Steady-State Distribution
 
 To determine the long-run probabilities, I can compute the steady-state distribution by finding the eigenvector corresponding to the eigenvalue of 1.
-
-![Steady-State Distribution](/Users/andrewshin/Downloads/markov_possession/table3.png)
 ```{r, include=FALSE}
 steady_states <- steady_dist(P)
-steady_states[order(-steady_states$p),]
+steady_states <- steady_states[order(-steady_states$p),]
 ```
-![Plot of Steady-State Distribution](/Users/andrewshin/Downloads/markov_possession/steady_state_plot.png)
+```{r}
+kable(steady_states, caption = "Steady-state Distribution")
+```
+
 The steady-state distribution represents the long-term behavior of the passing network, where each value corresponds to the probability that the ball is with a particular player after many passes.
 
 Laporte has the highest stationary probability, indicating that in the long run, he is the most likely player to have possession of the ball. As a center-back, this might suggest that he is frequently involved in ball circulation, likely playing a key role in building play from the back. Rodri, as a central defensive midfielder, also has a high probability. His role often involves controlling the tempo of the game and distributing passes, which is consistent with a high stationary probability.
@@ -334,7 +338,7 @@ comp_plot <- ggplot(dis_long, aes(x = reorder(Player, -P), y = P, group = Type, 
 #       height = 5, width = 7, units="in")
 ```
 
-![Plot of Steady-State Distribution](/Users/andrewshin/Downloads/markov_possession/comparison_plot.png)
+![Plot of Steady-State Distribution](comparison_plot.png)
 
 $$
 rmse_1 = \sqrt{mean((empirical_{35th\ min} - steady_{23rd\ min})^2)},\ rmse_2 = \sqrt{mean((empirical_{45th\ min} - steady_{23rd\ min})^2)}
@@ -387,7 +391,7 @@ simulations <- function(itrs, players, n) {
       }
     }
     # Average the values over the number of iterations 'itr'
-    values <- values / itr
+    values <- round(values / itr, digits=5)
     # Add the averaged values as a new column to this data frame
     result <- cbind(result, values)
   }
@@ -420,22 +424,21 @@ actual_dist_45 <- ac_dis_4[order(ac_dis_4$Player),]$p
 rmse6 <- sqrt(mean((actual_dist_45- vec2)^2)) # calculate RMSE between empirical and sim data
 
 # creates a data frame to store info I obtained above
-df_mse <- data_frame(MSE = c("steady_state vs empirical_35", "steady_state vs empirical_45", 
+df_mse <- data_frame(RMSE = c("steady_state vs empirical_35", "steady_state vs empirical_45", 
                              "sim vs empirical_35", "sim vs empirical_45"), 
                      value = c(rmse3,rmse4,rmse5,rmse6))
 ```
 
 ### Result of Monte Carlo Simulation
 
-![Comparison between the steady-state distribution and the distribution from the simulation](/Users/andrewshin/Downloads/markov_possession/table4.png)
-
-```{r, include=FALSE}
-result_sim1
-result_sim2
+```{r}
+kable(df_mse, caption = "RMSE Comparison b/t steady-state and simulation")
 ```
-![Result of Monte Carlo Simulation (35th min)](/Users/andrewshin/Downloads/markov_possession/table5.png)
 
-![Result of Monte Carlo Simulation (45th min)](/Users/andrewshin/Downloads/markov_possession/table6.png)
+```{r}
+kable(result_sim1, caption = "Result of Monte Carlo Simulation (35th min)")
+kable(result_sim2, caption = "Result of Monte Carlo Simulation (45th min)")
+```
 
 Based on the RMSE, the steady-state distribution closely matches the empirical distribution at both 35th and 45th minute. However, both simulation distributions slightly aligns more with the empirical distributions.
 
