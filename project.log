@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.7.31)  20 AUG 2024 21:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.7.31)  26 AUG 2024 12:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -772,338 +772,338 @@ LaTeX Warning: Command \' invalid in math mode on input line 437.
 
 
 [4]
-<comparison_plot.png, id=53, 505.89pt x 361.35pt>
+
+[5]
+<comparison_plot.png, id=60, 505.89pt x 361.35pt>
 File: comparison_plot.png Graphic file (type png)
 <use comparison_plot.png>
-Package pdftex.def Info: comparison_plot.png  used on input line 506.
+Package pdftex.def Info: comparison_plot.png  used on input line 549.
 (pdftex.def)             Requested size: 469.76265pt x 335.54477pt.
 
-Overfull \hbox (32.82411pt too wide) detected at line 512
+Overfull \hbox (32.82411pt too wide) detected at line 555
 \OML/lmm/m/it/10 rmse[] \OT1/lmr/m/n/10 = []\OML/lmm/m/it/10 ;  rmse[] \OT1/lmr/m/n/10 = []
  []
 
 
 
-[5]
-
 [6 <./comparison_plot.png>]
-Overfull \hbox (15.86055pt too wide) in paragraph at lines 587--588
+Overfull \hbox (15.86055pt too wide) in paragraph at lines 630--631
 []\T1/lmr/m/n/10 Iteration  
  []
 
 
-Overfull \hbox (0.86475pt too wide) in paragraph at lines 589--590
+Overfull \hbox (0.86475pt too wide) in paragraph at lines 632--633
  \T1/lmr/m/n/10 Morata
  []
 
 
-Overfull \hbox (2.93344pt too wide) in paragraph at lines 595--596
+Overfull \hbox (2.93344pt too wide) in paragraph at lines 638--639
  []\T1/lmr/m/n/10 Fabián
  []
 
 
-Overfull \hbox (3.48439pt too wide) in paragraph at lines 597--598
+Overfull \hbox (3.48439pt too wide) in paragraph at lines 640--641
  []\T1/lmr/m/n/10 Lamine
  []
 
 
-Overfull \hbox (7.55856pt too wide) in paragraph at lines 601--602
+Overfull \hbox (7.55856pt too wide) in paragraph at lines 644--645
  \T1/lmr/m/n/10 Williams
  []
 
 
-Overfull \hbox (7.65273pt too wide) in paragraph at lines 603--604
+Overfull \hbox (7.65273pt too wide) in paragraph at lines 646--647
  []\T1/lmr/m/n/10 Pedri
  []
 
 
-Overfull \hbox (9.31929pt too wide) in paragraph at lines 607--608
+Overfull \hbox (9.31929pt too wide) in paragraph at lines 650--651
  []\T1/lmr/m/n/10 Rodri
  []
 
 
-Overfull \hbox (2.76729pt too wide) in paragraph at lines 609--610
+Overfull \hbox (2.76729pt too wide) in paragraph at lines 652--653
  \T1/lmr/m/n/10 Simón
  []
 
 
-Overfull \hbox (15.86055pt too wide) in paragraph at lines 615--616
+Overfull \hbox (15.86055pt too wide) in paragraph at lines 658--659
 []\T1/lmr/m/n/10 Iteration  
  []
 
 
-Overfull \hbox (0.86475pt too wide) in paragraph at lines 617--618
+Overfull \hbox (0.86475pt too wide) in paragraph at lines 660--661
  \T1/lmr/m/n/10 Morata
  []
 
 
-Overfull \hbox (2.93344pt too wide) in paragraph at lines 623--624
+Overfull \hbox (2.93344pt too wide) in paragraph at lines 666--667
  []\T1/lmr/m/n/10 Fabián
  []
 
 
-Overfull \hbox (3.48439pt too wide) in paragraph at lines 625--626
+Overfull \hbox (3.48439pt too wide) in paragraph at lines 668--669
  []\T1/lmr/m/n/10 Lamine
  []
 
 
-Overfull \hbox (7.55856pt too wide) in paragraph at lines 629--630
+Overfull \hbox (7.55856pt too wide) in paragraph at lines 672--673
  \T1/lmr/m/n/10 Williams
  []
 
 
-Overfull \hbox (7.65273pt too wide) in paragraph at lines 631--632
+Overfull \hbox (7.65273pt too wide) in paragraph at lines 674--675
  []\T1/lmr/m/n/10 Pedri
  []
 
 
-Overfull \hbox (9.31929pt too wide) in paragraph at lines 635--636
+Overfull \hbox (9.31929pt too wide) in paragraph at lines 678--679
  []\T1/lmr/m/n/10 Rodri
  []
 
 
-Overfull \hbox (2.76729pt too wide) in paragraph at lines 637--638
+Overfull \hbox (2.76729pt too wide) in paragraph at lines 680--681
  \T1/lmr/m/n/10 Simón
  []
 
 
-Overfull \hbox (1.1278pt too wide) in paragraph at lines 643--643
+Overfull \hbox (1.1278pt too wide) in paragraph at lines 686--686
  []|\T1/lmr/m/n/10 0.0800|
  []
 
 
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 644--644
- []|\T1/lmr/m/n/10 0.0760|
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 687--687
+ []|\T1/lmr/m/n/10 0.0907|
  []
 
 
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 644--644
- []|\T1/lmr/m/n/10 0.1493|
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 687--687
+ []|\T1/lmr/m/n/10 0.1213|
  []
 
 
-Overfull \hbox (3.3233pt too wide) in paragraph at lines 644--645
- []|\T1/lmr/m/n/10 0.0187|
+Overfull \hbox (3.3233pt too wide) in paragraph at lines 687--688
+ []|\T1/lmr/m/n/10 0.0080|
  []
 
 
-Overfull \hbox (1.1278pt too wide) in paragraph at lines 645--645
- []|\T1/lmr/m/n/10 0.0932|
+Overfull \hbox (1.1278pt too wide) in paragraph at lines 688--688
+ []|\T1/lmr/m/n/10 0.0855|
  []
 
 
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 646--646
- []|\T1/lmr/m/n/10 0.0880|
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 689--689
+ []|\T1/lmr/m/n/10 0.0810|
  []
 
 
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 646--646
- []|\T1/lmr/m/n/10 0.1467|
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 689--689
+ []|\T1/lmr/m/n/10 0.1461|
  []
 
 
-Overfull \hbox (3.3233pt too wide) in paragraph at lines 646--647
- []|\T1/lmr/m/n/10 0.0126|
+Overfull \hbox (3.3233pt too wide) in paragraph at lines 689--690
+ []|\T1/lmr/m/n/10 0.0149|
  []
 
 
-Overfull \hbox (1.1278pt too wide) in paragraph at lines 647--647
- []|\T1/lmr/m/n/10 0.0873|
+Overfull \hbox (1.1278pt too wide) in paragraph at lines 690--690
+ []|\T1/lmr/m/n/10 0.0884|
  []
 
 
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 648--648
- []|\T1/lmr/m/n/10 0.0813|
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 691--691
+ []|\T1/lmr/m/n/10 0.0837|
  []
 
 
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 648--648
- []|\T1/lmr/m/n/10 0.1446|
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 691--691
+ []|\T1/lmr/m/n/10 0.1445|
  []
 
 
-Overfull \hbox (3.3233pt too wide) in paragraph at lines 648--649
+Overfull \hbox (3.3233pt too wide) in paragraph at lines 691--692
  []|\T1/lmr/m/n/10 0.0131|
  []
 
 
-Overfull \hbox (1.1278pt too wide) in paragraph at lines 649--649
- []|\T1/lmr/m/n/10 0.0881|
- []
-
-
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 650--650
- []|\T1/lmr/m/n/10 0.0825|
- []
-
-
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 650--650
- []|\T1/lmr/m/n/10 0.1456|
- []
-
-
-Overfull \hbox (3.3233pt too wide) in paragraph at lines 650--651
- []|\T1/lmr/m/n/10 0.0133|
- []
-
-
-Overfull \hbox (15.86055pt too wide) in paragraph at lines 675--676
-[]\T1/lmr/m/n/10 Iteration  
- []
-
-
-Overfull \hbox (0.86475pt too wide) in paragraph at lines 677--678
- \T1/lmr/m/n/10 Morata
- []
-
-
-Overfull \hbox (2.93344pt too wide) in paragraph at lines 683--684
- []\T1/lmr/m/n/10 Fabián
- []
-
-
-Overfull \hbox (3.48439pt too wide) in paragraph at lines 685--686
- []\T1/lmr/m/n/10 Lamine
- []
-
-
-Overfull \hbox (7.55856pt too wide) in paragraph at lines 689--690
- \T1/lmr/m/n/10 Williams
- []
-
-
-Overfull \hbox (7.65273pt too wide) in paragraph at lines 691--692
- []\T1/lmr/m/n/10 Pedri
- []
-
-
-Overfull \hbox (9.31929pt too wide) in paragraph at lines 695--696
- []\T1/lmr/m/n/10 Rodri
- []
-
-
-Overfull \hbox (2.76729pt too wide) in paragraph at lines 697--698
- \T1/lmr/m/n/10 Simón
- []
-
-
-Overfull \hbox (15.86055pt too wide) in paragraph at lines 703--704
-[]\T1/lmr/m/n/10 Iteration  
- []
-
-
-Overfull \hbox (0.86475pt too wide) in paragraph at lines 705--706
- \T1/lmr/m/n/10 Morata
- []
-
-
-Overfull \hbox (2.93344pt too wide) in paragraph at lines 711--712
- []\T1/lmr/m/n/10 Fabián
- []
-
-
-Overfull \hbox (3.48439pt too wide) in paragraph at lines 713--714
- []\T1/lmr/m/n/10 Lamine
- []
-
-
-Overfull \hbox (7.55856pt too wide) in paragraph at lines 717--718
- \T1/lmr/m/n/10 Williams
- []
-
-
-Overfull \hbox (7.65273pt too wide) in paragraph at lines 719--720
- []\T1/lmr/m/n/10 Pedri
- []
-
-
-Overfull \hbox (9.31929pt too wide) in paragraph at lines 723--724
- []\T1/lmr/m/n/10 Rodri
- []
-
-
-Overfull \hbox (2.76729pt too wide) in paragraph at lines 725--726
- \T1/lmr/m/n/10 Simón
- []
-
-
-Overfull \hbox (1.1278pt too wide) in paragraph at lines 731--731
- []|\T1/lmr/m/n/10 0.0897|
- []
-
-
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 732--732
- []|\T1/lmr/m/n/10 0.0937|
- []
-
-
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 732--732
- []|\T1/lmr/m/n/10 0.1468|
- []
-
-
-Overfull \hbox (3.3233pt too wide) in paragraph at lines 732--733
- []|\T1/lmr/m/n/10 0.0127|
- []
-
-
-Overfull \hbox (1.1278pt too wide) in paragraph at lines 733--733
- []|\T1/lmr/m/n/10 0.0901|
- []
-
-
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 734--734
- []|\T1/lmr/m/n/10 0.0840|
- []
-
-
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 734--734
- []|\T1/lmr/m/n/10 0.1453|
- []
-
-
-Overfull \hbox (3.3233pt too wide) in paragraph at lines 734--735
- []|\T1/lmr/m/n/10 0.0127|
- []
-
-
-Overfull \hbox (1.1278pt too wide) in paragraph at lines 735--735
- []|\T1/lmr/m/n/10 0.0879|
- []
-
-
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 736--736
- []|\T1/lmr/m/n/10 0.0838|
- []
-
-
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 736--736
- []|\T1/lmr/m/n/10 0.1455|
- []
-
-
-Overfull \hbox (3.3233pt too wide) in paragraph at lines 736--737
- []|\T1/lmr/m/n/10 0.0135|
- []
-
-
-Overfull \hbox (1.1278pt too wide) in paragraph at lines 737--737
+Overfull \hbox (1.1278pt too wide) in paragraph at lines 692--692
  []|\T1/lmr/m/n/10 0.0876|
  []
 
 
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 738--738
- []|\T1/lmr/m/n/10 0.0831|
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 693--693
+ []|\T1/lmr/m/n/10 0.0836|
  []
 
 
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 738--738
- []|\T1/lmr/m/n/10 0.1447|
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 693--693
+ []|\T1/lmr/m/n/10 0.1448|
  []
 
 
-Overfull \hbox (3.3233pt too wide) in paragraph at lines 738--739
- []|\T1/lmr/m/n/10 0.0132|
+Overfull \hbox (3.3233pt too wide) in paragraph at lines 693--694
+ []|\T1/lmr/m/n/10 0.0133|
+ []
+
+
+Overfull \hbox (15.86055pt too wide) in paragraph at lines 718--719
+[]\T1/lmr/m/n/10 Iteration  
+ []
+
+
+Overfull \hbox (0.86475pt too wide) in paragraph at lines 720--721
+ \T1/lmr/m/n/10 Morata
+ []
+
+
+Overfull \hbox (2.93344pt too wide) in paragraph at lines 726--727
+ []\T1/lmr/m/n/10 Fabián
+ []
+
+
+Overfull \hbox (3.48439pt too wide) in paragraph at lines 728--729
+ []\T1/lmr/m/n/10 Lamine
+ []
+
+
+Overfull \hbox (7.55856pt too wide) in paragraph at lines 732--733
+ \T1/lmr/m/n/10 Williams
+ []
+
+
+Overfull \hbox (7.65273pt too wide) in paragraph at lines 734--735
+ []\T1/lmr/m/n/10 Pedri
+ []
+
+
+Overfull \hbox (9.31929pt too wide) in paragraph at lines 738--739
+ []\T1/lmr/m/n/10 Rodri
+ []
+
+
+Overfull \hbox (2.76729pt too wide) in paragraph at lines 740--741
+ \T1/lmr/m/n/10 Simón
+ []
+
+
+Overfull \hbox (15.86055pt too wide) in paragraph at lines 746--747
+[]\T1/lmr/m/n/10 Iteration  
+ []
+
+
+Overfull \hbox (0.86475pt too wide) in paragraph at lines 748--749
+ \T1/lmr/m/n/10 Morata
+ []
+
+
+Overfull \hbox (2.93344pt too wide) in paragraph at lines 754--755
+ []\T1/lmr/m/n/10 Fabián
+ []
+
+
+Overfull \hbox (3.48439pt too wide) in paragraph at lines 756--757
+ []\T1/lmr/m/n/10 Lamine
+ []
+
+
+Overfull \hbox (7.55856pt too wide) in paragraph at lines 760--761
+ \T1/lmr/m/n/10 Williams
+ []
+
+
+Overfull \hbox (7.65273pt too wide) in paragraph at lines 762--763
+ []\T1/lmr/m/n/10 Pedri
+ []
+
+
+Overfull \hbox (9.31929pt too wide) in paragraph at lines 766--767
+ []\T1/lmr/m/n/10 Rodri
+ []
+
+
+Overfull \hbox (2.76729pt too wide) in paragraph at lines 768--769
+ \T1/lmr/m/n/10 Simón
+ []
+
+
+Overfull \hbox (1.1278pt too wide) in paragraph at lines 774--774
+ []|\T1/lmr/m/n/10 0.0921|
+ []
+
+
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 775--775
+ []|\T1/lmr/m/n/10 0.0770|
+ []
+
+
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 775--775
+ []|\T1/lmr/m/n/10 0.1468|
+ []
+
+
+Overfull \hbox (3.3233pt too wide) in paragraph at lines 775--776
+ []|\T1/lmr/m/n/10 0.0095|
+ []
+
+
+Overfull \hbox (1.1278pt too wide) in paragraph at lines 776--776
+ []|\T1/lmr/m/n/10 0.0883|
+ []
+
+
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 777--777
+ []|\T1/lmr/m/n/10 0.0848|
+ []
+
+
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 777--777
+ []|\T1/lmr/m/n/10 0.1500|
+ []
+
+
+Overfull \hbox (3.3233pt too wide) in paragraph at lines 777--778
+ []|\T1/lmr/m/n/10 0.0149|
+ []
+
+
+Overfull \hbox (1.1278pt too wide) in paragraph at lines 778--778
+ []|\T1/lmr/m/n/10 0.0890|
+ []
+
+
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 779--779
+ []|\T1/lmr/m/n/10 0.0835|
+ []
+
+
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 779--779
+ []|\T1/lmr/m/n/10 0.1454|
+ []
+
+
+Overfull \hbox (3.3233pt too wide) in paragraph at lines 779--780
+ []|\T1/lmr/m/n/10 0.0134|
+ []
+
+
+Overfull \hbox (1.1278pt too wide) in paragraph at lines 780--780
+ []|\T1/lmr/m/n/10 0.0877|
+ []
+
+
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 781--781
+ []|\T1/lmr/m/n/10 0.0833|
+ []
+
+
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 781--781
+ []|\T1/lmr/m/n/10 0.1448|
+ []
+
+
+Overfull \hbox (3.3233pt too wide) in paragraph at lines 781--782
+ []|\T1/lmr/m/n/10 0.0131|
  []
 
 
@@ -1117,18 +1117,18 @@ L3 programming layer <2024-05-27>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 12046 strings out of 475544
- 186121 string characters out of 5776421
- 1964905 words of memory out of 5000000
- 34454 multiletter control sequences out of 15000+600000
+ 12053 strings out of 475544
+ 186261 string characters out of 5776421
+ 1960905 words of memory out of 5000000
+ 34458 multiletter control sequences out of 15000+600000
  605095 words of font info for 78 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 89i,7n,93p,639b,587s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,7n,93p,660b,587s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on project.pdf (8 pages, 422533 bytes).
+Output written on project.pdf (8 pages, 425840 bytes).
 PDF statistics:
- 200 PDF objects out of 1000 (max. 8388607)
- 159 compressed objects within 2 object streams
- 35 named destinations out of 1000 (max. 500000)
- 126 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 209 PDF objects out of 1000 (max. 8388607)
+ 168 compressed objects within 2 object streams
+ 38 named destinations out of 1000 (max. 500000)
+ 134 words of extra memory for PDF output out of 10000 (max. 10000000)
 
