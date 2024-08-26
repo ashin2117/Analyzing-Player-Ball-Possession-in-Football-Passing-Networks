@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.7.31)  26 AUG 2024 12:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.7.31)  26 AUG 2024 12:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -774,10 +774,10 @@ LaTeX Warning: Command \' invalid in math mode on input line 437.
 [4]
 
 [5]
-<comparison_plot.png, id=60, 505.89pt x 361.35pt>
-File: comparison_plot.png Graphic file (type png)
-<use comparison_plot.png>
-Package pdftex.def Info: comparison_plot.png  used on input line 549.
+<plots/comparison_plot.png, id=60, 505.89pt x 361.35pt>
+File: plots/comparison_plot.png Graphic file (type png)
+<use plots/comparison_plot.png>
+Package pdftex.def Info: plots/comparison_plot.png  used on input line 549.
 (pdftex.def)             Requested size: 469.76265pt x 335.54477pt.
 
 Overfull \hbox (32.82411pt too wide) detected at line 555
@@ -786,7 +786,7 @@ Overfull \hbox (32.82411pt too wide) detected at line 555
 
 
 
-[6 <./comparison_plot.png>]
+[6 <./plots/comparison_plot.png>]
 Overfull \hbox (15.86055pt too wide) in paragraph at lines 630--631
 []\T1/lmr/m/n/10 Iteration  
  []
@@ -868,82 +868,82 @@ Overfull \hbox (2.76729pt too wide) in paragraph at lines 680--681
 
 
 Overfull \hbox (1.1278pt too wide) in paragraph at lines 686--686
- []|\T1/lmr/m/n/10 0.0800|
+ []|\T1/lmr/m/n/10 0.0853|
  []
 
 
 Overfull \hbox (12.20834pt too wide) in paragraph at lines 687--687
- []|\T1/lmr/m/n/10 0.0907|
+ []|\T1/lmr/m/n/10 0.0853|
  []
 
 
 Overfull \hbox (12.20834pt too wide) in paragraph at lines 687--687
- []|\T1/lmr/m/n/10 0.1213|
+ []|\T1/lmr/m/n/10 0.1347|
  []
 
 
 Overfull \hbox (3.3233pt too wide) in paragraph at lines 687--688
- []|\T1/lmr/m/n/10 0.0080|
+ []|\T1/lmr/m/n/10 0.0200|
  []
 
 
 Overfull \hbox (1.1278pt too wide) in paragraph at lines 688--688
- []|\T1/lmr/m/n/10 0.0855|
+ []|\T1/lmr/m/n/10 0.0826|
  []
 
 
 Overfull \hbox (12.20834pt too wide) in paragraph at lines 689--689
- []|\T1/lmr/m/n/10 0.0810|
+ []|\T1/lmr/m/n/10 0.0877|
  []
 
 
 Overfull \hbox (12.20834pt too wide) in paragraph at lines 689--689
- []|\T1/lmr/m/n/10 0.1461|
+ []|\T1/lmr/m/n/10 0.1443|
  []
 
 
 Overfull \hbox (3.3233pt too wide) in paragraph at lines 689--690
- []|\T1/lmr/m/n/10 0.0149|
+ []|\T1/lmr/m/n/10 0.0129|
  []
 
 
 Overfull \hbox (1.1278pt too wide) in paragraph at lines 690--690
- []|\T1/lmr/m/n/10 0.0884|
+ []|\T1/lmr/m/n/10 0.0886|
  []
 
 
 Overfull \hbox (12.20834pt too wide) in paragraph at lines 691--691
- []|\T1/lmr/m/n/10 0.0837|
- []
-
-
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 691--691
- []|\T1/lmr/m/n/10 0.1445|
- []
-
-
-Overfull \hbox (3.3233pt too wide) in paragraph at lines 691--692
- []|\T1/lmr/m/n/10 0.0131|
- []
-
-
-Overfull \hbox (1.1278pt too wide) in paragraph at lines 692--692
- []|\T1/lmr/m/n/10 0.0876|
- []
-
-
-Overfull \hbox (12.20834pt too wide) in paragraph at lines 693--693
  []|\T1/lmr/m/n/10 0.0836|
  []
 
 
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 691--691
+ []|\T1/lmr/m/n/10 0.1458|
+ []
+
+
+Overfull \hbox (3.3233pt too wide) in paragraph at lines 691--692
+ []|\T1/lmr/m/n/10 0.0136|
+ []
+
+
+Overfull \hbox (1.1278pt too wide) in paragraph at lines 692--692
+ []|\T1/lmr/m/n/10 0.0879|
+ []
+
+
 Overfull \hbox (12.20834pt too wide) in paragraph at lines 693--693
- []|\T1/lmr/m/n/10 0.1448|
+ []|\T1/lmr/m/n/10 0.0834|
+ []
+
+
+Overfull \hbox (12.20834pt too wide) in paragraph at lines 693--693
+ []|\T1/lmr/m/n/10 0.1444|
  []
 
 
 Overfull \hbox (3.3233pt too wide) in paragraph at lines 693--694
- []|\T1/lmr/m/n/10 0.0133|
+ []|\T1/lmr/m/n/10 0.0134|
  []
 
 
@@ -1028,62 +1028,62 @@ Overfull \hbox (2.76729pt too wide) in paragraph at lines 768--769
 
 
 Overfull \hbox (1.1278pt too wide) in paragraph at lines 774--774
- []|\T1/lmr/m/n/10 0.0921|
+ []|\T1/lmr/m/n/10 0.0952|
  []
 
 
 Overfull \hbox (12.20834pt too wide) in paragraph at lines 775--775
- []|\T1/lmr/m/n/10 0.0770|
+ []|\T1/lmr/m/n/10 0.0794|
  []
 
 
 Overfull \hbox (12.20834pt too wide) in paragraph at lines 775--775
- []|\T1/lmr/m/n/10 0.1468|
+ []|\T1/lmr/m/n/10 0.1389|
  []
 
 
 Overfull \hbox (3.3233pt too wide) in paragraph at lines 775--776
- []|\T1/lmr/m/n/10 0.0095|
+ []|\T1/lmr/m/n/10 0.0063|
  []
 
 
 Overfull \hbox (1.1278pt too wide) in paragraph at lines 776--776
- []|\T1/lmr/m/n/10 0.0883|
+ []|\T1/lmr/m/n/10 0.0849|
  []
 
 
 Overfull \hbox (12.20834pt too wide) in paragraph at lines 777--777
- []|\T1/lmr/m/n/10 0.0848|
+ []|\T1/lmr/m/n/10 0.0845|
  []
 
 
 Overfull \hbox (12.20834pt too wide) in paragraph at lines 777--777
- []|\T1/lmr/m/n/10 0.1500|
+ []|\T1/lmr/m/n/10 0.1468|
  []
 
 
 Overfull \hbox (3.3233pt too wide) in paragraph at lines 777--778
- []|\T1/lmr/m/n/10 0.0149|
+ []|\T1/lmr/m/n/10 0.0141|
  []
 
 
 Overfull \hbox (1.1278pt too wide) in paragraph at lines 778--778
- []|\T1/lmr/m/n/10 0.0890|
+ []|\T1/lmr/m/n/10 0.0884|
  []
 
 
 Overfull \hbox (12.20834pt too wide) in paragraph at lines 779--779
- []|\T1/lmr/m/n/10 0.0835|
+ []|\T1/lmr/m/n/10 0.0831|
  []
 
 
 Overfull \hbox (12.20834pt too wide) in paragraph at lines 779--779
- []|\T1/lmr/m/n/10 0.1454|
+ []|\T1/lmr/m/n/10 0.1459|
  []
 
 
 Overfull \hbox (3.3233pt too wide) in paragraph at lines 779--780
- []|\T1/lmr/m/n/10 0.0134|
+ []|\T1/lmr/m/n/10 0.0128|
  []
 
 
@@ -1093,17 +1093,17 @@ Overfull \hbox (1.1278pt too wide) in paragraph at lines 780--780
 
 
 Overfull \hbox (12.20834pt too wide) in paragraph at lines 781--781
- []|\T1/lmr/m/n/10 0.0833|
+ []|\T1/lmr/m/n/10 0.0839|
  []
 
 
 Overfull \hbox (12.20834pt too wide) in paragraph at lines 781--781
- []|\T1/lmr/m/n/10 0.1448|
+ []|\T1/lmr/m/n/10 0.1454|
  []
 
 
 Overfull \hbox (3.3233pt too wide) in paragraph at lines 781--782
- []|\T1/lmr/m/n/10 0.0131|
+ []|\T1/lmr/m/n/10 0.0132|
  []
 
 
@@ -1118,14 +1118,14 @@ L3 programming layer <2024-05-27>
  ) 
 Here is how much of TeX's memory you used:
  12053 strings out of 475544
- 186261 string characters out of 5776421
+ 186303 string characters out of 5776421
  1960905 words of memory out of 5000000
  34458 multiletter control sequences out of 15000+600000
  605095 words of font info for 78 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  89i,7n,93p,660b,587s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/andrewshin/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on project.pdf (8 pages, 425840 bytes).
+Output written on project.pdf (8 pages, 425850 bytes).
 PDF statistics:
  209 PDF objects out of 1000 (max. 8388607)
  168 compressed objects within 2 object streams

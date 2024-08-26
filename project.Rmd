@@ -71,9 +71,9 @@ possession (75%) were the highest among all the matches they played in
 this tournament.
 
 ```{r, include=FALSE}
-lineup <- read_csv("/Users/andrewshin/Downloads/markov_possession/lineup_dataframe.csv", 
+lineup <- read_csv("dataset/lineup_dataframe.csv", 
                    show_col_types = FALSE)
-event <- read_csv("/Users/andrewshin/Downloads/markov_possession/event_dataframe.csv",
+event <- read_csv("dataset/event_dataframe.csv",
                   show_col_types = FALSE)
 ```
 
@@ -470,7 +470,7 @@ comp_plot <- ggplot(dis_long, aes(x = reorder(Player, -P), y = P, group = Type, 
 #       height = 5, width = 7, units="in")
 ```
 
-![Plot of Steady-State Distribution](comparison_plot.png)
+![Plot of Steady-State Distribution](plots/comparison_plot.png)
 
 $$
 rmse_1 = \sqrt{mean((empirical_{35th\ min} - steady_{23rd\ min})^2)},\ rmse_2 = \sqrt{mean((empirical_{45th\ min} - steady_{23rd\ min})^2)}
