@@ -620,3 +620,9 @@ likelihood of the ball reaching a specific player after several passing
 sequences and the average number of individual pass receptions.
 Exploring these probabilities further yields deeper insights into the
 dynamics of the passing network and its evolution throughout the match.
+
+## Reference
+
+- Sheldon M. Ross (2010) *Introduction to Probability Models* (10th ed.). Academic Press
+
+- Wayne L Winston, Jeffrey B Goldberg (2004) *Operations Research: Applications and Algorithms* (4th ed.). CENGAGE Learning
