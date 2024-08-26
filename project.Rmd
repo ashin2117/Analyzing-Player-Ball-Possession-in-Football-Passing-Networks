@@ -47,8 +47,7 @@ from one state to another, which can be modeled using Markov chains.
 By applying the transition probability matrix and Markov Chains theory,
 I can gain insights into the system’s dynamics, such as estimating the
 probability of a specific player receiving the ball after multiple
-passes, calculating the expected number of passes needed to reach a
-particular player, and predicting long-term behavior through the
+passes and predicting long-term behavior through the
 simulation of stochastic processes. Additionally, the steady-state
 distribution can estimate how ball possession is likely to be
 distributed among players over time. This approach can also highlight a
@@ -339,7 +338,8 @@ $$ $$
 \sum_{i=1}^{11} (\text{probability that a ball is originally at player } i)
 $$ $$
 \times (\text{probability of passing from player } i \text{ to player } j \text{ in n transitions})
-$$ $$
+$$ 
+$$
 = \sum_{i=1}^{11} q_iP_{ij}^n
 $$
 
@@ -412,7 +412,7 @@ for (i in 1:11) {
 ```
 
 ```{r}
-kable(result)
+kable(result, col.names = "prob")
 ```
 
 ### Steady-State Distribution vs Empirical Distribution
@@ -586,7 +586,6 @@ kable(result_sim1, caption = "Result of Monte Carlo Simulation (35th min)")
 ```{r}
 kable(result_sim2, caption = "Result of Monte Carlo Simulation (45th min)")
 ```
-
 Based on the RMSE, the steady-state distribution closely matches the
 empirical distribution at both 35th and 45th minute. However, both
 simulation distributions slightly aligns more with the empirical
