@@ -48,7 +48,7 @@ By applying the transition probability matrix and Markov Chains theory,
 I can gain insights into the system’s dynamics, such as estimating the
 probability of a specific player receiving the ball after multiple
 passes and predicting its long-term behavior with steady-state distribution. This approach can highlight a
-central player in ball possession, suggesting that the majority of
+central player in ball possession, indicating that the majority of
 passes are likely to be directed toward this player.
 
 ## Methods {#meth}
